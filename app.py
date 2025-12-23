@@ -6,10 +6,10 @@ from src.rag_chain import create_rag_chain
 
 load_dotenv()
 st.set_page_config(page_title="RAG Chatbot", page_icon="🤖") 
-st.title("RAG Chatbot") # Initialize session state 
 if "rag_chain" not in st.session_state: 
     st.session_state.rag_chain = None # Sidebar for API key input 
-with st.sidebar: api_key = st.text_input("Enter your OpenAI API Key", type="password") 
+with st.sidebar: 
+    api_key = st.text_input("Enter your OpenAI API Key", type="password") 
 if api_key:
     os.environ["OPENAI_API_KEY"] = api_key # File uploader 
 uploaded_file = st.file_uploader("Choose a file", type=["pdf", "png", "jpg", "jpeg"]) 
