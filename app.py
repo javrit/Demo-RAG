@@ -31,6 +31,7 @@ query = st.text_input("Ask a question about the uploaded document")
 if st.button("Ask"): 
     if st.session_state.rag_chain and query: 
         with st.spinner("Generating answer..."): 
+            print("rag chaine type", type(st.session_state.rag_chain))
             result = st.session_state.rag_chain.invoke(query) 
             st.subheader("Answer:") 
             st.write(result) 

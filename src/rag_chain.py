@@ -24,5 +24,5 @@ def create_rag_chain(chunks):
     doc_search = FAISS.from_documents(chunks, embeddings)
     retriever = doc_search.as_retriever(search_type="similarity", search_kwargs={'k':5})
     LLM = ChatOpenAI(model="gpt-4.1-nano") #Does not take pictures in input
-    rag_chain=({"context" : retriever | format_docs, "question": RunnablePassthrough() | PROMPT | LLM | StrOutputParser()})
+    rag_chain=({"context" : retriever | format_docs, "question": RunnablePassthrough()} | PROMPT | LLM | StrOutputParser())
     return rag_chain
