@@ -13,7 +13,8 @@ with st.sidebar:
 if api_key:
     os.environ["OPENAI_API_KEY"] = api_key # File uploader 
 if not api_key:
-    os.environ["OPENAI_API_KEY"] = st.secrets.get('OPENAI_API_KEY')
+    api_key = st.secrets.get('OPENAI_API_KEY')
+    os.environ["OPENAI_API_KEY"] = api_key
 uploaded_file = st.file_uploader("Choose a file", type=["pdf", "png", "jpg", "jpeg"]) 
 if uploaded_file is not None: 
     if st.button("Process File"): 
