@@ -12,6 +12,8 @@ with st.sidebar:
     api_key = st.text_input("Enter your OpenAI API Key", type="password") 
 if api_key:
     os.environ["OPENAI_API_KEY"] = api_key # File uploader 
+if not api_key:
+    os.environ["OPENAI_API_KEY"] = st.secrets.get('OPENAI_API_KEY')
 uploaded_file = st.file_uploader("Choose a file", type=["pdf", "png", "jpg", "jpeg"]) 
 if uploaded_file is not None: 
     if st.button("Process File"): 
@@ -26,6 +28,7 @@ if uploaded_file is not None:
                 except ValueError as e: st.error(str(e)) 
                 finally: # Remove the temporary file 
                     os.remove(uploaded_file.name) 
+        else: st.error("Please provide your OpenAI API key.") # Query input 
 query = st.text_input("Ask a question about the uploaded document") 
 if st.button("Ask"): 
     if st.session_state.rag_chain and query: 
