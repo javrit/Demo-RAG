@@ -28,12 +28,12 @@ if uploaded_file is not None:
                     os.remove(uploaded_file.name) 
         else: st.error("Please provide your OpenAI API key.") # Query input 
         query = st.text_input("Ask a question about the uploaded document") 
-        if st.button("Ask"): 
-            if st.session_state.rag_chain and query: 
-                with st.spinner("Generating answer..."): 
-                    result = st.session_state.rag_chain.invoke(query) 
-                    st.subheader("Answer:") 
-                    st.write(result) 
-            elif not st.session_state.rag_chain: 
-                st.error("Please upload and process a file first.") 
-            else: st.error("Please enter a question.")
+if st.button("Ask"): 
+    if st.session_state.rag_chain and query: 
+        with st.spinner("Generating answer..."): 
+            result = st.session_state.rag_chain.invoke(query) 
+            st.subheader("Answer:") 
+            st.write(result) 
+    elif not st.session_state.rag_chain: 
+        st.error("Please upload and process a file first.") 
+    else: st.error("Please enter a question.")
