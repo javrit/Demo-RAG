@@ -26,7 +26,6 @@ if uploaded_file is not None:
                 except ValueError as e: st.error(str(e)) 
                 finally: # Remove the temporary file 
                     os.remove(uploaded_file.name) 
-        else: st.error("Please provide your OpenAI API key.") # Query input 
 query = st.text_input("Ask a question about the uploaded document") 
 if st.button("Ask"): 
     if st.session_state.rag_chain and query: 
